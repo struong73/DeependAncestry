@@ -1,0 +1,31 @@
+﻿@using System.Collections.Generic
+
+@model IEnumerable<DeependAncestry.Web.Models.Results>
+
+@if (Model != null && Model.Any())
+{
+    <p>Results:</p>
+    <table id="customers">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>GENDER</th>
+            <th>BIRTHPLACE</th>
+        </tr>
+        @foreach (DeependAncestry.Web.Models.Results person in Model)
+        {
+            <tr>
+                <td>@person.id</td>
+                <td>@person.name</td>
+                <td>@person.gender</td>
+                <td>@person.birthplace</td>
+            </tr>
+        }
+    </table>
+}
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.NoResults))
+{
+    <p>Sorry, no results were found for <strong>@ViewBag.Name</strong></p>
+}
+

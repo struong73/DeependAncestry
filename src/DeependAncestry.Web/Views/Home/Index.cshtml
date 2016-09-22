@@ -1,0 +1,47 @@
+﻿@using DeependAncestry.Web.Models
+@model DeependAncestry.Web.Models.SearchFieldsViewModel
+
+@{
+    ViewBag.Title = "DeepAncestry - Simple Search";
+}
+
+<h1>Deepend<strong>Ancestry</strong></h1>
+
+<div class="row">
+    @using (Ajax.BeginForm("GetResults", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultSection" }))
+    {
+        <div class="col-md-4">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div>
+                <div>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    <div style="float:right;"><input type="submit" class="btn btn-default" value="Search" /></div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div>Gender: &nbsp;&nbsp; 
+                @{
+                    foreach (GenderViewModel gender in ViewBag.GenderList)
+                    {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="Gender" name="Gender" class="chkclass" value="@gender.Gender" @gender.IsSelected />
+                            @gender.GenderName
+                        </label>
+                    }
+                }
+                <div style="float:right;"><a href="/Advanced" class="elements"><span>Advanced search</span></a></div>
+            </div>
+        </div>
+                    }
+</div>
+
+    <div>&nbsp;</div>
+
+    <div id="resultSection">
+        @Html.Partial("_ResultPartial", Model)
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

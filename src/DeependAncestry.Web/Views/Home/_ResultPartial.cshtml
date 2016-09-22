@@ -1,0 +1,41 @@
+﻿@using System.Collections.Generic
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using System.Configuration
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<DeependAncestry.Web.Models.Results>
+
+@if (Model != null && Model.Any())
+{
+    <p>Results:</p>
+    <table id="customers">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>GENDER</th>
+            <th>BIRTHPLACE</th>
+        </tr>
+        @foreach (DeependAncestry.Web.Models.Results person in Model)
+        {
+            <tr>
+                <td>@person.id</td>
+                <td>@person.name</td>
+                <td>@person.gender</td>
+                <td>@person.birthplace</td>
+            </tr>
+        }
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("GetResults", "Home",
+    new { page, gender = ViewBag.GenderList, name = ViewBag.Name }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing
+    (
+        new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultSection" }
+    ))
+
+}
+@if (!string.IsNullOrWhiteSpace(ViewBag.NoResults))
+{
+    <p>Sorry, no results were found for <strong>@ViewBag.Name</strong></p>
+}

@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
 
 namespace DeependAncestry.Web.Models
 {
@@ -49,26 +46,4 @@ namespace DeependAncestry.Web.Models
         public int level { get; set; }
         public List<PersonBirthPlace> children { get; set; }
     }
-
-    public class PersonBirthPlaceTest
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string gender { get; set; }
-        public int? father_id { get; set; }
-        public int? mother_id { get; set; }
-        public string birthplace { get; set; }
-        public int level { get; set; }
-        public List<PersonBirthPlaceTest> children { get; set; }
-    }
-
-    public class FatherMotherLevel
-    {
-        public int? father_id { get; set; }
-        public int? mother_id { get; set; }
-        public int level { get; set; }
-        public List<PersonBirthPlace> Children { get; set; }
-
-    }
-
 }

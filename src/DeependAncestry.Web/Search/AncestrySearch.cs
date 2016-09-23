@@ -129,8 +129,6 @@ namespace DeependAncestry.Web.Search
 
                         IQueryable<PersonBirthPlace> resultMatchesDirection = resultsWithPlaceCopy.AsQueryable().Where<PersonBirthPlace>(predicateDirection);
 
-                        //var resultMatchesDirection = resultsWithPlaceCopy.Where(ch => ch.mother_id == id || ch.father_id == id).ToList();
-
                         if (resultMatchesDirection != null)
                         {
                             var childrenList = GetChildrenList(resultMatchesDirection, resultsWithPlaceCopy);
